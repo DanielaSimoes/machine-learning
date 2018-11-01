@@ -3,13 +3,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-import matplotlib.pyplot as plt
-import seaborn
-import statsmodels.formula.api as smf
 
-
-# # ______________________________ Linear Regression _____________________________________ #
-def linear(wine_set):
+# # ______________________________ Logistic Regression _____________________________________ #
+def logistic(wine_set):
 
     X = wine_set[['quality']]
 
@@ -28,5 +24,5 @@ def linear(wine_set):
     print("Coefficient of determination:", r2_score(X_test, predicted_data)*100,"%")
 
 if __name__ == '__main__':
-    white = pd.read_csv('winequality-red.csv', low_memory=False, sep=';')
-    linear(white)
+    white = pd.read_csv('winequality-white.csv', low_memory=False, sep=';')
+    logistic(white)

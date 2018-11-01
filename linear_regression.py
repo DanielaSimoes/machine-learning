@@ -3,10 +3,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-import matplotlib.pyplot as plt
-import seaborn
-import statsmodels.formula.api as smf
-
 
 # # ______________________________ Linear Regression _____________________________________ #
 def linear(wine_set):
@@ -24,7 +20,7 @@ def linear(wine_set):
 
     predicted_data = model.predict(y_test)
     print("Mean squared error:", mean_squared_error(X_test, predicted_data))
-    print("Coefficient of determination:", r2_score(X_test, predicted_data))
+    print("Coefficient of determination:", r2_score(X_test, predicted_data)*100,"%")
 
 if __name__ == '__main__':
     white = pd.read_csv('winequality-white.csv', low_memory=False, sep=';')
