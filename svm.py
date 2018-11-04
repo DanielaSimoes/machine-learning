@@ -20,7 +20,7 @@ def svm(df):
     y = labelencoder_y.fit_transform(y)
 
     # 30% of the dataset is used for testing and 70% for training
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
     sc = StandardScaler()
     X_train = sc.fit_transform(X_train)
@@ -36,6 +36,7 @@ def svm(df):
 
     print("Average accuracy: ", accuracies.mean())
     print("Standard deviation: ", accuracies.std())
+    print("Wait a moment...")
 
     parameters = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
                   {'C': [1, 10, 100, 1000], 'kernel': ['rbf'],
@@ -49,6 +50,7 @@ def svm(df):
     print("Best accuracy: ", best_accuracy)
     print("Best parameters: ", best_parameters)
 
+    print("Done")
     """
         Then we need to train with the best parameters and test again
     """
