@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy
 from sklearn.svm import SVC
 from sklearn.cross_validation import train_test_split
 from sklearn.model_selection import cross_val_score
@@ -13,8 +13,23 @@ from sklearn.preprocessing import LabelEncoder
 # # ______________________________ SVM  _____________________________________ #
 def svm(df):
 
-    X = df.drop(['quality'], axis=1)
-    y = df['quality']
+    X = dataset[:, 0:11]
+
+    y = dataset[:, 11]
+    new_y = []
+
+    for each in y:
+        if 0 <= each <= 4:
+            # 0, 1, 2, 3, 4
+            new_y.append(0)
+        elif 5 <= each <= 6:
+            # 5, 6
+            new_y.append(1)
+        else:
+            # 7, 8, 9, 10
+            new_y.append(2)
+
+    y = new_y
 
     labelencoder_y = LabelEncoder()
     y = labelencoder_y.fit_transform(y)
@@ -42,8 +57,10 @@ def svm(df):
                   {'C': [1, 10, 100, 1000], 'kernel': ['rbf'],
                    'gamma': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]}]
 
-    grid_search = GridSearchCV(estimator = clf, param_grid = parameters, scoring = 'accuracy', cv = 10,)
+    grid_search = GridSearchCV(estimator = clf, param_grid = parameters, n_jobs=-1 ,scoring = 'accuracy', cv = 10,)
+
     grid_search.fit(X_train, y_train)
+
     best_accuracy = grid_search.best_score_
     best_parameters = grid_search.best_params_
 
@@ -56,5 +73,5 @@ def svm(df):
     """
 
 if __name__ == '__main__':
-    white = pd.read_csv('winequality-white.csv', low_memory=False, sep=';')
-    svm(white)
+    dataset = numpy.loadtxt("winequality-white.csv", delimiter=";", skiprows=1)
+    svm(dataset)
