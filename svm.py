@@ -41,7 +41,7 @@ def svm(df):
     X_train = sc.fit_transform(X_train)
     X_test = sc.transform(X_test)
 
-    clf = SVC(kernel = 'rbf', random_state = 0)
+    clf = SVC(kernel = 'rbf', random_state = 0, gamma=0.9, C=10)
     clf.fit(X_train, y_train)
 
     y_pred = clf.predict(X_test)
@@ -57,15 +57,15 @@ def svm(df):
                   {'C': [1, 10, 100, 1000], 'kernel': ['rbf'],
                    'gamma': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]}]
 
-    grid_search = GridSearchCV(estimator = clf, param_grid = parameters, n_jobs=-1 ,scoring = 'accuracy', cv = 10,)
+    #grid_search = GridSearchCV(estimator = clf, param_grid = parameters, n_jobs=-1 ,scoring = 'accuracy', cv = 10,)
 
-    grid_search.fit(X_train, y_train)
+    #grid_search.fit(X_train, y_train)
 
-    best_accuracy = grid_search.best_score_
-    best_parameters = grid_search.best_params_
+    #best_accuracy = grid_search.best_score_
+    #best_parameters = grid_search.best_params_
 
-    print("Best accuracy: ", best_accuracy)
-    print("Best parameters: ", best_parameters)
+    #print("Best accuracy: ", best_accuracy)
+    #print("Best parameters: ", best_parameters)
 
     print("Done")
     """
