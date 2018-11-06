@@ -8,8 +8,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 
 
-
-
 # # ______________________________ SVM  _____________________________________ #
 def svm(df):
 
@@ -51,7 +49,6 @@ def svm(df):
 
     print("Average accuracy: ", accuracies.mean())
     print("Standard deviation: ", accuracies.std())
-    print("Wait a moment...")
 
     parameters = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
                   {'C': [1, 10, 100, 1000], 'kernel': ['rbf'],
@@ -67,10 +64,6 @@ def svm(df):
     #print("Best accuracy: ", best_accuracy)
     #print("Best parameters: ", best_parameters)
 
-    print("Done")
-    """
-        Then we need to train with the best parameters and test again
-    """
 
 if __name__ == '__main__':
     dataset = numpy.loadtxt("winequality-white.csv", delimiter=";", skiprows=1)
