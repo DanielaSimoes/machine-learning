@@ -1,8 +1,4 @@
-import numpy
 from sklearn.linear_model import LogisticRegression
-from sklearn.cross_validation import train_test_split, cross_val_score, KFold
-from sklearn.model_selection import GridSearchCV
-import numpy as np
 
 
 # # ___________________ Logistic Regression HyperParameters Tunning __________________ #

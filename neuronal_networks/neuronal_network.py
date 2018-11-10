@@ -26,3 +26,13 @@ if __name__ == '__main__':
     X = dataset[:, 0:11]
 
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
+
+    # best_parameters = svc_tunning(x_train, y_train)
+    best_parameters = {'C': 10, 'gamma': 0.9, 'kernel': 'rbf'}
+
+    # Pass the best parameters to train, and the Train Data
+    trained_model = svc_train(x_train, y_train, c=best_parameters["C"], gamma=best_parameters["gamma"],
+                              kernel=best_parameters["kernel"])
+
+    # Evaluate the model
+    evaluate(trained_model, x_test, y_test)

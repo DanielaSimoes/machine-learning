@@ -3,6 +3,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 from tunning_hyperparameters import svc_tunning
 from train_model import svc_train
+from test_model import test
 from evaluate_model import evaluate
 import numpy
 
@@ -47,5 +48,10 @@ if __name__ == '__main__':
     trained_model = svc_train(x_train, y_train, c=best_parameters["C"], gamma=best_parameters["gamma"], kernel=best_parameters["kernel"])
 
     # Evaluate the model
-    evaluate(trained_model, x_test, y_test)
+    print("Evaluate model\n")
+    evaluate(trained_model, x_train, y_train)
+
+    # Test the model
+    print("Evaluate model\n")
+    test(trained_model, x_test, y_test)
 

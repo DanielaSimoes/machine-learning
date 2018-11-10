@@ -2,6 +2,7 @@ import numpy
 from sklearn.cross_validation import train_test_split
 from tunning_hyperparameters import logistic_tunning
 from train_model import logistic_train
+from test_model import test
 from evaluate_model import evaluate
 
 if __name__ == '__main__':
@@ -38,7 +39,15 @@ if __name__ == '__main__':
     trained_model_non_regularized = logistic_train(x_train, y_train, penalty=best_parameters["model_non_regularized"]["Penalty"], C=best_parameters["model_non_regularized"]["C"], solver=best_parameters["model_non_regularized"]["Solver"], multi_class=best_parameters["model_non_regularized"]["MultiClass"], max_iter=1000)
 
     # Evaluate the model
-    print("Regularized: \n")
-    evaluate(trained_model_regularized, x_test, y_test)
-    print("Non Regularized: \n")
-    evaluate(trained_model_non_regularized, x_test, y_test)
+    print("\n Evaluate the model \n")
+    print("\nRegularized:")
+    evaluate(trained_model_regularized, x_train, y_train)
+    print("\nNon Regularized:")
+    evaluate(trained_model_non_regularized, x_train, y_train)
+
+    # Test the model
+    print("\n Test the model \n")
+    print("\nRegularized:")
+    test(trained_model_regularized, x_test, y_test)
+    print("\nNon Regularized:")
+    test(trained_model_non_regularized, x_test, y_test)
