@@ -4,7 +4,7 @@ import numpy as np
 
 
 # # ___________________ Logistic Regression HyperParameters Tunning __________________ #
-def logistic_tunning(X_train, y_train, X_test, y_test):
+def logistic_tunning(X_train, y_train):
 
     lg = LogisticRegression()
 

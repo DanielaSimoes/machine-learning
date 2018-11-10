@@ -31,7 +31,7 @@ if __name__ == '__main__':
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
     # Now we're going to Tunning Hyperparameters only with Train Data
-    best_parameters = logistic_tunning(x_train, y_train, x_test, x_train)
+    best_parameters = logistic_tunning(x_train, y_train)
 
     # Pass the best parameters to train, and the Train Data
     trained_model_regularized = logistic_train(x_train, y_train, penalty=best_parameters["model_regularized"]["Penalty"], C=best_parameters["model_regularized"]["C"], solver=best_parameters["model_regularized"]["Solver"], multi_class=best_parameters["model_regularized"]["MultiClass"], max_iter=1000)
