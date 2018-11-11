@@ -39,16 +39,10 @@ def optimize(x_train, y_train, x_test, y_test):
                 history = model.fit(x_train, y_train, epochs=2, batch_size=50, verbose=2, validation_data=(x_test, y_test),
                           callbacks=[tensorboard])
 
-                best_val_acc = None
-
-                for val_acc in history.history["val_acc"]:
-                    if best_val_acc is None or best_val_acc < val_acc:
-                        best_val_acc = val_acc
-
                 results.append({
                     "dense_layer": dense_layer,
                     "layer_size": layer_size,
-                    "val_acc": best_val_acc
+                    "val_acc": sum(history.history["val_acc"]) / float(len(history.history["val_acc"]))
                 })
 
     best_val_acc = None
