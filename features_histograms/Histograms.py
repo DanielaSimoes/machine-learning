@@ -1,4 +1,4 @@
-from sklearn.preprocessing import normalize, MaxAbsScaler
+from sklearn.preprocessing import MaxAbsScaler
 import numpy 
 import matplotlib.pyplot as plt
 
@@ -7,8 +7,9 @@ def histograms(wine_set):
 
     X = wine_set[:, 0:11]
     y = wine_set[:, 11]
+    features = ["fixed acidity","volatile acidity","citric acid","residual sugar","chlorides","free sulfur dioxide","total sulfur dioxide","density","pH","sulphates","alcohol"]
 	
-    X = MaxAbsScaler().fit_transform(X)
+    #X = MaxAbsScaler().fit_transform(X)
     
     class0 = []
     class1 = []
@@ -31,14 +32,14 @@ def histograms(wine_set):
             i += 1
 
 
-        kwargs0 = dict(histtype='bar', alpha=0.5, normed=False, bins='auto', color='darkgreen')
-        kwargs1 = dict(histtype='bar', alpha=0.5, normed=False, bins='auto', color='yellow')
-        kwargs2 = dict(histtype='bar', alpha=0.5, normed=False, bins='auto', color='navy')
+        kwargs0 = dict(histtype='bar', alpha=0.5, bins='auto', color='red')
+        kwargs1 = dict(histtype='bar', alpha=0.5, bins='auto', color='yellow')
+        kwargs2 = dict(histtype='bar', alpha=0.5, bins='auto', color='navy')
 
         plt.hist(class0, **kwargs0)
         plt.hist(class1, **kwargs1)
         plt.hist(class2, **kwargs2)
-        plt.title('Feature:' + str(feature))
+        plt.title('Feature ' + str(feature+1) + ": " + features[feature])
         plt.ylabel('Counts')
         plt.xlabel('Value')
         plt.grid(axis='y', alpha=0.75)
@@ -50,5 +51,5 @@ def histograms(wine_set):
 	
 	
 if __name__ == '__main__':
-    dataset = numpy.loadtxt("winequality-white.csv", delimiter=";", skiprows=1)
+    dataset = numpy.loadtxt("../winequality-white.csv", delimiter=";", skiprows=1)
     histograms(dataset)
