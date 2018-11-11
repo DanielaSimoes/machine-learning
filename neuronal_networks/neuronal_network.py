@@ -1,5 +1,11 @@
 import numpy
 from sklearn.cross_validation import train_test_split
+from optimize import optimize
+from train_wine_model import nn_train
+from evaluate_wine_model import evaluate
+from test_model import test
+
+
 
 if __name__ == '__main__':
 
@@ -27,12 +33,14 @@ if __name__ == '__main__':
 
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
-    # best_parameters = svc_tunning(x_train, y_train)
-    best_parameters = {'C': 10, 'gamma': 0.9, 'kernel': 'rbf'}
+    # best_parameters
+    best_parameters = optimize(x_train, y_train, x_test, y_test)
 
     # Pass the best parameters to train, and the Train Data
-    trained_model = svc_train(x_train, y_train, c=best_parameters["C"], gamma=best_parameters["gamma"],
-                              kernel=best_parameters["kernel"])
+    trained_model = nn_train(x_train, y_train, x_test, y_test, best_parameters)
 
     # Evaluate the model
-    evaluate(trained_model, x_test, y_test)
+    evaluate(trained_model, x_train, y_train)
+
+    # Test the model
+    test(trained_model, x_test, y_test)

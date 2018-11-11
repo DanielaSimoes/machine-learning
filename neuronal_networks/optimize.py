@@ -5,11 +5,13 @@ from keras import optimizers
 from keras.layers import Dense
 
 
-def optimize(x_train, y_train):
+def optimize(x_train, y_train, x_test, y_test):
 
     dense_layers = [0, 1, 2]
     layer_sizes = [32, 64, 128]
     classifications = 3
+
+    results = []
 
     for dense_layer in dense_layers:
         for layer_size in layer_sizes:
@@ -34,4 +36,27 @@ def optimize(x_train, y_train):
                               metrics=['accuracy'],
                               )
 
-                model.fit(x_train, y_train, epochs=1000, batch_size=50, verbose=2, callbacks=[tensorboard])
+                history = model.fit(x_train, y_train, epochs=2, batch_size=50, verbose=2, validation_data=(x_test, y_test),
+                          callbacks=[tensorboard])
+
+                best_val_acc = None
+
+                for val_acc in history.history["val_acc"]:
+                    if best_val_acc is None or best_val_acc < val_acc:
+                        best_val_acc = val_acc
+
+                results.append({
+                    "dense_layer": dense_layer,
+                    "layer_size": layer_size,
+                    "val_acc": best_val_acc
+                })
+
+    best_val_acc = None
+    best_parameters = None
+
+    for result in results:
+        if best_val_acc is None or best_val_acc < result["val_acc"]:
+            best_val_acc = result["val_acc"]
+            best_parameters = result
+
+    return best_parameters
