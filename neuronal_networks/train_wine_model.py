@@ -1,8 +1,6 @@
 from keras.models import Sequential
 from keras.layers import Dense
 from keras import optimizers
-from sklearn.model_selection import cross_val_score
-from keras.wrappers.scikit_learn import KerasClassifier
 
 
 def nn_train(x_train, y_train, x_test, y_test, best_parameters):
@@ -20,11 +18,11 @@ def nn_train(x_train, y_train, x_test, y_test, best_parameters):
     model.add(Dense(classifications, activation="softmax"))
 
     adam = optimizers.adam(lr=0.01, clipnorm=1.)
-    model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
+    model.compile(loss='sparse_categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     #model = KerasClassifier(build_fn=model, epochs=150, batch_size=10, verbose=0)
     #cross_val_score(estimator=model, X=x_test, y=y_test)
 
-    model.fit(x_train, y_train, epochs=1, batch_size=50, verbose=2, validation_data=(x_test, y_test))
+    model.fit(x_train, y_train, epochs=2, batch_size=50, verbose=2, validation_data=(x_test, y_test))
 
     return model
