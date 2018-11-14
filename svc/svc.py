@@ -33,16 +33,10 @@ if __name__ == '__main__':
 
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
-    labelencoder_y = LabelEncoder()
-    y = labelencoder_y.fit_transform(y)
-
-    sc = StandardScaler()
-    X_train = sc.fit_transform(x_train)
-    X_test = sc.transform(x_test)
-
     # Now we're going to Tunning Hyperparameters only with Train Data
     #best_parameters = svc_tunning(x_train, y_train)
-    best_parameters = {'C': 10, 'gamma': 0.9, 'kernel': 'rbf'}
+    best_parameters = {'C': 10, 'gamma': 0.001 , 'kernel': 'rbf'}
+    #best_parameters = {'C': 10, 'gamma': 0.9 , 'kernel': 'rbf'}
 
     # Pass the best parameters to train, and the Train Data
     trained_model = svc_train(x_train, y_train, c=best_parameters["C"], gamma=best_parameters["gamma"], kernel=best_parameters["kernel"])

@@ -1,5 +1,6 @@
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
+import numpy as np
 
 
 # # ___________________ SVC HyperParameters Tunning __________________ #
@@ -7,11 +8,10 @@ def svc_tunning(X_train, y_train):
 
     clf = SVC()
 
-    parameters = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
-                  {'C': [1, 10, 100, 1000], 'kernel': ['rbf'],
-                   'gamma': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]}]
+    parameters = [{'C': np.logspace(-3, 2, 6), 'kernel': ['rbf'],
+                   'gamma': np.logspace(-3, 2, 6)}]
 
-    grid_search = GridSearchCV(estimator=clf, param_grid=parameters, n_jobs=-1,scoring='accuracy', cv=10,)
+    grid_search = GridSearchCV(estimator=clf, param_grid=parameters, n_jobs=-1,scoring='accuracy', cv=5,)
 
     grid_search.fit(X_train, y_train)
 

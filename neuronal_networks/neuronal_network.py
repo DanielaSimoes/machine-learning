@@ -4,7 +4,7 @@ from optimize import optimize
 from train_wine_model import nn_train
 from evaluate_wine_model import evaluate
 from test_model import test
-
+from keras.models import load_model
 
 
 if __name__ == '__main__':
@@ -39,8 +39,12 @@ if __name__ == '__main__':
     # Pass the best parameters to train, and the Train Data
     trained_model = nn_train(x_train, y_train, x_test, y_test, best_parameters)
 
+    trained_model.save('final_model.h5')
+
+    #trained_model = load_model('final_model.h5')
+
     # Evaluate the model
     evaluate(trained_model, x_train, y_train)
 
     # Test the model
-    test(trained_model, x_test, y_test)
+    #test(trained_model, x_test, y_test)
