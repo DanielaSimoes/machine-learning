@@ -34,17 +34,17 @@ if __name__ == '__main__':
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
 
     # best_parameters
-    #best_parameters = optimize(x_train, y_train, x_test, y_test)
+    best_parameters = optimize(x_train, y_train, x_test, y_test)
 
     # Pass the best parameters to train, and the Train Data
-    #trained_model = nn_train(x_train, y_train, x_test, y_test, best_parameters)
+    trained_model = nn_train(x_train, y_train, x_test, y_test, best_parameters)
 
-    #trained_model.save('final_model.h5')
+    trained_model.save('final_model.h5')
 
-    trained_model = load_model('final_model.h5')
+    #trained_model = load_model('final_model.h5')
 
     # Evaluate the model
-    #evaluate(trained_model, x_train, y_train)
+    evaluate(trained_model, x_train, y_train)
 
     # Test the model
-    test(trained_model, x_test, y_test)
+    #test(trained_model, x_test, y_test)
