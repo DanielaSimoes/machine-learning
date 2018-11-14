@@ -16,6 +16,15 @@ def histograms(wine_set):
     class2 = []
     i=0
     #feature=2
+    kwargs = dict(histtype='bar', alpha=1, bins='auto', color='navy')
+    plt.hist(y, **kwargs)
+    plt.title('Quality')
+    plt.ylabel('Counts')
+    plt.xlabel('Value')
+    plt.grid(axis='y', alpha=0.75)
+    plt.show()   
+	
+	
 	
     for feature in range(0,11):
         i=0

@@ -17,9 +17,9 @@ def logistic_tunning(X_train, y_train):
     solver = ['liblinear', 'saga']
     multi_class = ['ovr']
 
-    hyperparameters = dict(C=C, penalty=penalty, solver=solver, multi_class=multi_class)
+    hyperparameters = dict( penalty=penalty, solver=solver, multi_class=multi_class)
 
-    clf = GridSearchCV(lg, hyperparameters, cv=5, verbose=0)
+    clf = GridSearchCV(lg, hyperparameters, cv=4, verbose=0)
 
     clf.fit(X_train, y_train)
 
